@@ -70,9 +70,15 @@
   * {
     @apply border-border !scroll-smooth;
   }
+
+  html {
+    scroll-padding-top: 120px;
+  }
+
   body {
     @apply bg-background text-foreground;
   }
+
   button {
     @apply active:outline-none;
   }

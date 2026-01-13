@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   motion,
   AnimatePresence,
@@ -7,6 +7,7 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 export const FloatingNav = ({
@@ -21,17 +22,45 @@ export const FloatingNav = ({
   className?: string;
 }) => {
   const { scrollYProgress } = useScroll();
+  const pathname = usePathname();
+  const router = useRouter();
 
   // set true for the initial state so that nav bar is visible in the hero section
   const [visible, setVisible] = useState(true);
+
+  // Handle hash link clicks
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const hash = href.substring(1);
+      
+      if (pathname === "/") {
+        // On home page, scroll to section
+        const element = document.getElementById(hash);
+        if (element) {
+          const offset = 120; // Offset for navbar
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }
+      } else {
+        // On another page, navigate to home first, then scroll
+        router.push(`/#${hash}`);
+      }
+    }
+  };
 
   useMotionValueEvent(scrollYProgress, "change", (current) => {
     // Check if current is not undefined and is a number
     if (typeof current === "number") {
       let direction = current! - scrollYProgress.getPrevious()!;
 
-      if (scrollYProgress.get() < 0.05) {
-        // also set true for the initial state
+      if (scrollYProgress.get() < 0.05 || window.scrollY < 100) {
+        // also set true for the initial state and when near top
         setVisible(true);
       } else {
         if (direction < 0) {
@@ -42,6 +71,36 @@ export const FloatingNav = ({
       }
     }
   });
+
+  // Keep navbar visible when at top
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY < 100) {
+        setVisible(true);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Handle hash on page load
+  useEffect(() => {
+    if (pathname === "/" && window.location.hash) {
+      const hash = window.location.hash.substring(1);
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          const offset = 120;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }
+      }, 100);
+    }
+  }, [pathname]);
 
   return (
     <AnimatePresence mode="wait">
@@ -75,6 +134,7 @@ export const FloatingNav = ({
           <Link
             key={`link=${idx}`}
             href={navItem.link}
+            onClick={(e) => handleLinkClick(e, navItem.link)}
             className={cn(
               "relative dark:text-neutral-50 items-center  flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
             )}
