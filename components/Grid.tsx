@@ -1,5 +1,16 @@
+"use client";
+
 import { gridItems } from "@/data";
-import { BentoGrid, BentoGridItem } from "./ui/BentoGrid";
+import dynamic from "next/dynamic";
+
+// Dynamically import BentoGrid to avoid SSR issues with react-lottie
+const BentoGrid = dynamic(() => import("./ui/BentoGrid").then(mod => ({ default: mod.BentoGrid })), {
+  ssr: false
+});
+
+const BentoGridItem = dynamic(() => import("./ui/BentoGrid").then(mod => ({ default: mod.BentoGridItem })), {
+  ssr: false
+});
 
 const Grid = () => {
   return (

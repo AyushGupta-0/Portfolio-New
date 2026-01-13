@@ -1,8 +1,14 @@
-import { useState } from "react";
+"use client";
+
+import { useState, useEffect } from "react";
 import { IoCopyOutline } from "react-icons/io5";
 
 // Also install this npm i --save-dev @types/react-lottie
-import Lottie from "react-lottie";
+// Import Lottie only on client side to avoid SSR issues
+let Lottie: any = null;
+if (typeof window !== "undefined") {
+  Lottie = require("react-lottie").default;
+}
 
 import { cn } from "@/lib/utils";
 
@@ -180,7 +186,9 @@ export const BentoGridItem = ({
                   }`}
               >
                 {/* <img src="/confetti.gif" alt="confetti" /> */}
-                <Lottie options={defaultOptions} height={200} width={400} />
+                {Lottie && typeof window !== "undefined" && (
+                  <Lottie options={defaultOptions} height={200} width={400} />
+                )}
               </div>
 
               <MagicButton
