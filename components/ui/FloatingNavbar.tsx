@@ -30,6 +30,8 @@ export const FloatingNav = ({
 
   // Handle hash link clicks
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (typeof window === "undefined") return;
+    
     if (href.startsWith("#")) {
       e.preventDefault();
       const hash = href.substring(1);
@@ -56,7 +58,7 @@ export const FloatingNav = ({
 
   useMotionValueEvent(scrollYProgress, "change", (current) => {
     // Check if current is not undefined and is a number
-    if (typeof current === "number") {
+    if (typeof current === "number" && typeof window !== "undefined") {
       let direction = current! - scrollYProgress.getPrevious()!;
 
       if (scrollYProgress.get() < 0.05 || window.scrollY < 100) {
@@ -74,6 +76,8 @@ export const FloatingNav = ({
 
   // Keep navbar visible when at top
   useEffect(() => {
+    if (typeof window === "undefined") return;
+    
     const handleScroll = () => {
       if (window.scrollY < 100) {
         setVisible(true);
@@ -85,6 +89,8 @@ export const FloatingNav = ({
 
   // Handle hash on page load
   useEffect(() => {
+    if (typeof window === "undefined") return;
+    
     if (pathname === "/" && window.location.hash) {
       const hash = window.location.hash.substring(1);
       setTimeout(() => {

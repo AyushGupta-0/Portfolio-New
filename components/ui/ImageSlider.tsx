@@ -31,7 +31,7 @@ export const ImageSlider = ({ images, title }: ImageSliderProps) => {
 
   // Keyboard navigation
   useEffect(() => {
-    if (images.length <= 1) return;
+    if (typeof window === "undefined" || images.length <= 1) return;
 
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft") {

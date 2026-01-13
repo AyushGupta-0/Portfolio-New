@@ -22,6 +22,8 @@ interface ProjectModalProps {
 
 export const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) => {
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isOpen) {
         onClose();
