@@ -140,6 +140,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
       <style jsx>{`
         .flip-card-container {
           perspective: 1000px;
+          -webkit-perspective: 1000px;
         }
 
         .flip-card {
@@ -148,11 +149,13 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
           height: 100%;
           transition: transform 0.6s;
           transform-style: preserve-3d;
+          -webkit-transform-style: preserve-3d;
           cursor: pointer;
         }
 
         .flip-card.flipped {
           transform: rotateY(180deg);
+          -webkit-transform: rotateY(180deg);
         }
 
         .flip-card-front,
@@ -162,10 +165,13 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
           height: 100%;
           backface-visibility: hidden;
           -webkit-backface-visibility: hidden;
+          transform-style: preserve-3d;
+          -webkit-transform-style: preserve-3d;
         }
 
         .flip-card-back {
           transform: rotateY(180deg);
+          -webkit-transform: rotateY(180deg);
         }
 
         /* Custom Scrollbar */
