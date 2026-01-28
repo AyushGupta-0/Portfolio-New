@@ -288,31 +288,44 @@ export const companies = [
 export const workExperience = [
   {
     id: 1,
-    title: "Frontend Engineer Intern",
-    desc: "Assisted in the development of a web-based platform using React.js, enhancing interactivity.",
-    className: "md:col-span-2",
-    thumbnail: "/exp1.svg",
+    role: "Fullstack Developer",
+    company: "Jumpfast Technologies",
+    period: "Jan 2024 - Present",
+    icon: "/exp1.svg",
+    description: [
+      "Designed and developed full-stack management systems serving 500+ to 100K+ users with SQL database architecture",
+      "Built scalable enterprise dashboards using Django and Bootstrap for large-scale data management",
+      "Developed React Native mobile applications with responsive UI and seamless API integration",
+      "Created WhatsApp business automation flows for international clients, streamlining communication workflows",
+      "Worked with cloud platforms (AWS/GCP/Azure) for deployment, scaling, and infrastructure management",
+      "Led complete project lifecycles from requirements gathering to production deployment under tight deadlines",
+      "Conducted technical training sessions and presented solutions to stakeholders",
+    ],
   },
   {
     id: 2,
-    title: "Mobile App Dev - JSM Tech",
-    desc: "Designed and developed mobile app for both iOS & Android platforms using React Native.",
-    className: "md:col-span-2", // change to md:col-span-2
-    thumbnail: "/exp2.svg",
+    role: "Fullstack Developer",
+    company: "Lindustries Pvt. Ltd.",
+    period: "Jun 2023 - Dec 2023",
+    icon: "/exp2.svg",
+    description: [
+      "Built NFT Marketplace using Next.js, TypeScript, TailwindCSS, and XRPL Ledger",
+      "Developed responsive UI ensuring seamless cross-platform desktop and mobile performance",
+      "Integrated Web3 technologies including XRP Ledger, XXUM Wallet, and IPFS decentralized storage",
+      "Collaborated in agile sprints, daily standups, and retrospectives to ensure efficient project delivery",
+    ],
   },
   {
     id: 3,
-    title: "Freelance App Dev Project",
-    desc: "Led the dev of a mobile app for a client, from initial concept to deployment on app stores.",
-    className: "md:col-span-2", // change to md:col-span-2
-    thumbnail: "/exp3.svg",
-  },
-  {
-    id: 4,
-    title: "Lead Frontend Developer",
-    desc: "Developed and maintained user-facing features using modern frontend technologies.",
-    className: "md:col-span-2",
-    thumbnail: "/exp4.svg",
+    role: "Frontend React Developer",
+    company: "Coding Tribes",
+    period: "Mar 2023 - Jun 2023",
+    icon: "/exp3.svg",
+    description: [
+      "Migrated company website from WordPress to modern React architecture with Firebase backend",
+      "Implemented Redux state management and developed new UI features, increasing customer traffic by 75%",
+      "Contributed to browser extension development with focus on user experience and performance optimization",
+    ],
   },
 ];
 
@@ -320,14 +333,17 @@ export const socialMedia = [
   {
     id: 1,
     img: "/git.svg",
+    link: "https://github.com/AyushGupta-0",
   },
   {
     id: 2,
     img: "/twit.svg",
+    link: "https://x.com/ayushgupta",
   },
   {
     id: 3,
     img: "/link.svg",
+    link: "https://www.linkedin.com/in/ayush-gupta-2276b221b/",
   },
 ];
 
