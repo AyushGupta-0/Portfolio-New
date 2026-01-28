@@ -33,7 +33,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
   return (
     <div className="flip-card-container h-[280px] md:h-[320px]">
       <div
-        className={`flip-card ${isFlipped ? "flipped" : ""}`}
+        className={`flip-card-wrapper ${isFlipped ? "flipped" : ""}`}
         onClick={handleFlip}
         onKeyDown={handleKeyDown}
         role="button"
@@ -43,7 +43,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
         }`}
       >
         {/* Front Face */}
-        <div className="flip-card-front">
+        <div className="flip-card-face flip-card-front">
           <div className="relative w-full h-full rounded-3xl p-6 md:p-8 flex flex-col justify-between overflow-hidden border border-white/[0.1] group hover:shadow-2xl hover:shadow-purple/20 transition-all duration-300">
             {/* Gradient Background */}
             <div className="absolute inset-0 bg-gradient-to-br from-black-100 via-[#0d1224] to-black-200" />
@@ -92,7 +92,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
         </div>
 
         {/* Back Face */}
-        <div className="flip-card-back">
+        <div className="flip-card-face flip-card-back">
           <div className="relative w-full h-full rounded-3xl p-6 md:p-8 flex flex-col overflow-hidden border border-white/[0.1] group">
             {/* Gradient Background */}
             <div className="absolute inset-0 bg-gradient-to-br from-purple/10 via-[#0d1224] to-black-200" />
@@ -140,38 +140,35 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
       <style jsx>{`
         .flip-card-container {
           perspective: 1000px;
-          -webkit-perspective: 1000px;
         }
 
-        .flip-card {
+        .flip-card-wrapper {
           position: relative;
           width: 100%;
           height: 100%;
-          transition: transform 0.6s;
+          transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
           transform-style: preserve-3d;
-          -webkit-transform-style: preserve-3d;
           cursor: pointer;
         }
 
-        .flip-card.flipped {
+        .flip-card-wrapper.flipped {
           transform: rotateY(180deg);
-          -webkit-transform: rotateY(180deg);
         }
 
-        .flip-card-front,
-        .flip-card-back {
+        .flip-card-face {
           position: absolute;
           width: 100%;
           height: 100%;
           backface-visibility: hidden;
           -webkit-backface-visibility: hidden;
-          transform-style: preserve-3d;
-          -webkit-transform-style: preserve-3d;
+        }
+
+        .flip-card-front {
+          transform: rotateY(0deg);
         }
 
         .flip-card-back {
           transform: rotateY(180deg);
-          -webkit-transform: rotateY(180deg);
         }
 
         /* Custom Scrollbar */
